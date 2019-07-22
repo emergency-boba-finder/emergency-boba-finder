@@ -5,10 +5,12 @@
   "dependencies": {
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
+    "async": "^2.6.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "semantic-ui-react": "^0.87.3",
+    "tedious": "^5.0.3",
     "typescript": "^3.5.3"
   },
   "scripts": {
