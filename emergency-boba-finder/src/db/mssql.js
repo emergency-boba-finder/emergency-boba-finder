@@ -21,9 +21,27 @@ function getInterests(done) {
         new sql.Request().query('SELECT * FROM Interests', (err, result) => {
             // ... error checks
 
-            done(result);
+            done(result.recordset);
+        sql.close();
         })
     })
+
+    sql.on('error', err => {
+        // ... error handler
+    })
+}
+
+function addInterest(interest) {
+    sql.connect(config, err => {
+        if (err != undefined) {
+            console.log(err);
+        }
+
+        var query = `INSERT INTO [Interests] ([Name]) values ('${interest}')`;
+        new sql.Request().query(query, (err, result) => {
+        sql.close();
+        })
+    });
 
     sql.on('error', err => {
         // ... error handler
@@ -41,6 +59,7 @@ function createUser(user) {
         var query = `INSERT INTO [Users] ([FirstName], [LastName], [Location], [Distance]) VALUES ('${user.FirstName}', '${user.LastName}', '${user.Location}', '${user.Distance}');`
         new sql.Request().query(query, (err, result) => {
             // ... error checks
+            sql.close();
         })
     })
 
@@ -51,3 +70,4 @@ function createUser(user) {
 
 module.exports.getInterests = getInterests
 module.exports.createUser = createUser
+module.exports.addInterest = addInterest
