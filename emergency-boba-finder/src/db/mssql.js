@@ -48,6 +48,8 @@ function addInterest(interest) {
     })
 }
 
+function addUserInterest()
+
 function createUser(user) {
     sql.connect(config, err => {
         // ... error checks
@@ -56,7 +58,7 @@ function createUser(user) {
         }
         // Query
 
-        var query = `INSERT INTO [Users] ([FirstName], [LastName], [Location], [Distance]) VALUES ('${user.FirstName}', '${user.LastName}', '${user.Location}', '${user.Distance}');`
+        var query = `INSERT INTO [Users] ([FirstName], [LastName], [Location], [Distance], [Email]) VALUES ('${user.FirstName}', '${user.LastName}', '${user.Location}', '${user.Distance}', '${user.Email}');`
         new sql.Request().query(query, (err, result) => {
             // ... error checks
             sql.close();
