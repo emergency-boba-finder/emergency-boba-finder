@@ -34,7 +34,7 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
     public render() {
         return (
             <div className="userInformation">
-                {this.state.disclaimerCompliant && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
+                {!this.state.disclaimerCompliant && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
                 <div className={"description"}>Please update the below information</div>
                 <Location location={this.state.location} onUpdateLocation={this.onUpdateLocation} />
                 <Interests onInterestChanged={this.onInterestChanged} />
