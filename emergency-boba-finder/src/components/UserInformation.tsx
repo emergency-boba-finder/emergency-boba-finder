@@ -14,28 +14,32 @@ interface IUserInformationState {
     selectedInterestOptions: string[];
     location: string;
     disclaimerChecked: boolean;
+    disclaimerCompliant: boolean;
 }
 
 class UserInformation extends React.Component<IUserInformationProps, IUserInformationState>{
     state = {
         selectedInterestOptions: [],
         location: "",
-        disclaimerChecked: false
+        disclaimerChecked: false,
+        disclaimerCompliant: false
     }
 
     componentDidMount() {
         // make axios request and save data;
+        // Replace with axios response.
+        this.setState({ disclaimerCompliant: false });
     }
 
     public render() {
         return (
             <div className="userInformation">
-                <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>
+                {this.state.disclaimerCompliant && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
                 <div className={"description"}>Please update the below information</div>
                 <Location location={this.state.location} onUpdateLocation={this.onUpdateLocation} />
                 <Interests onInterestChanged={this.onInterestChanged} />
-                <Disclaimer onChecked={this.toggleDisclaimerChecked} />
-                <Button onClick={this.submitUserInformation}>Submit</Button>
+                {!this.state.disclaimerCompliant && <Disclaimer onChecked={this.toggleDisclaimerChecked} />}
+                <Button disabled={!this.isInformationComplete()} onClick={this.submitUserInformation}>Submit</Button>
             </div>
         );
     }
@@ -48,6 +52,11 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
 
     private toggleDisclaimerChecked = (checked: boolean) => {
         this.setState({ disclaimerChecked: checked })
+    }
+
+    private isInformationComplete = (): boolean => {
+        const { selectedInterestOptions, location, disclaimerChecked, disclaimerCompliant } = this.state;
+        return (disclaimerChecked || disclaimerCompliant) && location.length > 0 && selectedInterestOptions.length > 0;
     }
 
     private submitUserInformation = () => {
