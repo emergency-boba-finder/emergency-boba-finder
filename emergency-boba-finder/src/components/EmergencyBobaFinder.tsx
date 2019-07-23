@@ -1,6 +1,7 @@
-import React from 'react';
 // import UserInformation from './UserInformation';
-import './EmergencyBobaFinder.css'
+import './EmergencyBobaFinder.css';
+
+import React from 'react';
 
 class EmergencyBobaFinder extends React.Component {
     render() {

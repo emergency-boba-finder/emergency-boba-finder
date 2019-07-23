@@ -1,10 +1,12 @@
-import React from "react"
+import './UserInformation.css';
+
+import React from 'react';
+import { Button } from 'semantic-ui-react';
+
+import Disclaimer from './Disclaimer';
+import Interests from './Interests';
 // import axios from 'axios';
 import Location from './Location';
-import Interests from "./Interests";
-import { Button } from "semantic-ui-react"
-import Disclaimer from "./Disclaimer";
-import './UserInformation.css';
 
 interface IUserInformationProps {
     userFullName: string; // Facebook login will provide this information

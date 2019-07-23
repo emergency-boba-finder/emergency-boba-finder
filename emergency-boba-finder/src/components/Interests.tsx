@@ -1,6 +1,7 @@
-import React from "react"
-import { Dropdown, DropdownItemProps, DropdownProps } from 'semantic-ui-react'
-import { getFakeInterests } from "./TempFakeData"
+import React from 'react';
+import { Dropdown, DropdownItemProps, DropdownProps } from 'semantic-ui-react';
+
+import { getFakeInterests } from './TempFakeData';
 
 interface IUserInterestsProps {
     onInterestChanged: (selectedOptions: string[]) => void;
