@@ -1,12 +1,13 @@
 import React from 'react';
-import UserInformation from './UserInformation';
+// import UserInformation from './UserInformation';
+import './EmergencyBobaFinder.css'
 
 class EmergencyBobaFinder extends React.Component {
     render() {
         return (
-            <div>
+            <div className="page">
                 This is our EmergencyBobaFinder website!
-                <UserInformation userFullName={"Tabitha"} />
+                {/* <UserInformation userFullName={"Tabitha"} /> */}
             </div>
         );
     }

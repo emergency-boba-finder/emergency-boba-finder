@@ -1,27 +1,26 @@
 import React from 'react';
-import { Checkbox } from 'semantic-ui-react';
+import { Checkbox, CheckboxProps } from 'semantic-ui-react';
 
 export interface IDisclaimer {
-    checked: boolean,
+    onChecked: (checked: boolean) => void;
 };
 
-class Disclaimer extends React.Component<{}, IDisclaimer> {
-    constructor(props: any) {
-        super(props);
-        this.state = {
-            checked: false,
-        };
-    }
+class Disclaimer extends React.Component<IDisclaimer> {
     render() {
         return (
             <div>
-                <Checkbox 
+                <Checkbox
                     label="I agree to the terms and services"
-                    onClick={e => this.setState({checked: !this.state.checked})}
+                    onChange={this.changeChecked}
                 />
             </div>
         );
     }
+
+    private changeChecked = (event: React.FormEvent<HTMLInputElement>, data: CheckboxProps): void => {
+        this.props.onChecked(data.checked || false);
+    }
+
 }
 
 export default Disclaimer;

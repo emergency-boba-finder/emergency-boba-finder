@@ -1,43 +1,42 @@
 import React from "react"
 // import axios from 'axios';
 import Location from './Location';
-import UserInterests from "./UserInterests";
+import Interests from "./Interests";
 import { Button } from "semantic-ui-react"
+import Disclaimer from "./Disclaimer";
+import './UserInformation.css';
 
-interface ISignUpProps {
+interface IUserInformationProps {
     userFullName: string; // Facebook login will provide this information
 }
 
-interface ISignUpState {
+interface IUserInformationState {
     selectedInterestOptions: string[];
     location: string;
+    disclaimerChecked: boolean;
 }
 
-class UserInformation extends React.Component<ISignUpProps, ISignUpState>{
+class UserInformation extends React.Component<IUserInformationProps, IUserInformationState>{
     state = {
         selectedInterestOptions: [],
-        availableInterestOptions: [],
-        location: ""
+        location: "",
+        disclaimerChecked: false
     }
 
-    // componentDidMount() {
-    //     // make axios request and save data;
-    //     // axios.get(`URL`)
-    //     //     .then(res => {
-    //     //         let options = res.data.data.children.map(obj => obj.data);
-    //     //         options = options.sort();
-    //     //         this.setState({ options: options });
-    //     //     });
-    // }
+    componentDidMount() {
+        // make axios request and save data;
+    }
 
     public render() {
         return (
-            <>
-                <span>{this.props.userFullName}</span>
+            <div className="userInformation">
+                <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>
+                <div className={"description"}>Please update the below information</div>
                 <Location location={this.state.location} onUpdateLocation={this.onUpdateLocation} />
-                <UserInterests onInterestChanged={this.onInterestChanged} />
-                <Button />
-            </>
+                <Interests onInterestChanged={this.onInterestChanged} />
+                <Disclaimer onChecked={this.toggleDisclaimerChecked} />
+                <Button onClick={this.submitUserInformation}>Submit</Button>
+            </div>
         );
     }
 
@@ -46,19 +45,18 @@ class UserInformation extends React.Component<ISignUpProps, ISignUpState>{
     }
 
     private onUpdateLocation = (updatedLocation: string) => this.setState({ location: updatedLocation });
+
+    private toggleDisclaimerChecked = (checked: boolean) => {
+        this.setState({ disclaimerChecked: checked })
+    }
+
+    private submitUserInformation = () => {
+        // Add axios post
+
+        // For debugging - delete when path is available
+        // TODO delete
+        // console.log("Selected interest options: " + this.state.selectedInterestOptions + " location: " + this.state.location + " disclaimer: " + this.state.disclaimerChecked);
+    }
 }
 
 export default UserInformation;
-
-    // updateAddress(e: any) {
-    //     e.preventDefault();
-    //     axios.post("/location", {
-    //         location: this.state.location
-    //     })
-    //     .then(function(response){
-    //         console.log("response", response);
-    //     })
-    //     .catch(function(error){
-    //         console.log("error", error);
-    //     })
-    // };

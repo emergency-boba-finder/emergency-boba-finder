@@ -10,14 +10,14 @@ interface IUserInterestsState {
     options: string[];
 }
 
-class UserInterests extends React.Component<IUserInterestsProps, IUserInterestsState>{
+class Interests extends React.Component<IUserInterestsProps, IUserInterestsState>{
     state = {
         options: []
     }
 
     componentDidMount() {
-        // make axios request and save interest options
-        
+        // make axios request for available options
+
         this.setState({ options: getFakeInterests().sort() });
     }
 
@@ -55,4 +55,4 @@ class UserInterests extends React.Component<IUserInterestsProps, IUserInterestsS
     }
 }
 
-export default UserInterests;
+export default Interests;
