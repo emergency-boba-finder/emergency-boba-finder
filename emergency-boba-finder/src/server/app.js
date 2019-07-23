@@ -11,5 +11,11 @@ app.get('/createUser', (req, res) => {
   mssql.createUser({"FirstName": user.FirstName, "LastName": user.LastName, "Location": user.Location, "Distance": 0});
   res.send("Creating user");
 })
+app.get('/interests', (req, res) => {
+  mssql.getInterests((interests) =>  {
+    console.log(interests);
+    res.send(interests);
+  })
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
