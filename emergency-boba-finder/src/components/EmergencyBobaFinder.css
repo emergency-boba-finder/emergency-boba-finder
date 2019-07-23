@@ -1,0 +1,5 @@
+html, body, #app, #app>div.page {
+    background-color: #edf0fa;
+    height: 100%;
+    width: 100%;
+}

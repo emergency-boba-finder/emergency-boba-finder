@@ -1,0 +1,18 @@
+.userInformation {
+    --marginBottomShared: 25px;
+}
+
+.welcomeTitle {
+    font-size: 40px;
+    text-align: center;
+    vertical-align: middle;
+    height: 60px;
+    padding-top: 20px;
+    margin-bottom: var(--marginBottomShared);
+}
+
+.description {
+    font-size: 24px;
+    padding-top: 5px;
+    margin-bottom: var(--marginBottomShared);
+}
