@@ -1,12 +1,10 @@
 import React from 'react';
 import { Button, Form } from 'semantic-ui-react';
-import axios from 'axios';
+// import axios from 'axios';
 
 export interface ILocation {
     location: string,
 };
-
-// add axios
 
 class Location extends React.Component<{}, ILocation>{
     constructor(props: any) {
@@ -14,19 +12,21 @@ class Location extends React.Component<{}, ILocation>{
         this.state = {
             location: "",
         }
-        this.updateAddress = this.updateAddress.bind(this);
+        // this.updateAddress = this.updateAddress.bind(this);
     }
 
-    updateAddress(e: any) {
-        e.preventDefault();
-        axios.post("/location")
-            .then(function(response){
-                console.log("response", response);
-            })
-            .catch(function(error){
-                console.log("error", error);
-            })
-    };
+    // updateAddress(e: any) {
+    //     e.preventDefault();
+    //     axios.post("/location", {
+    //         location: this.state.location
+    //     })
+    //     .then(function(response){
+    //         console.log("response", response);
+    //     })
+    //     .catch(function(error){
+    //         console.log("error", error);
+    //     })
+    // };
 
     render() {
         return (
@@ -41,7 +41,7 @@ class Location extends React.Component<{}, ILocation>{
                         />
                     </Form.Field>
                 </Form>
-                <Button onClick={this.updateAddress}>Continue</Button>
+                {/* <Button onClick={this.updateAddress}>Continue</Button> */}
             </div>
         );
     }
