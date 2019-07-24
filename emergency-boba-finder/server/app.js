@@ -2,9 +2,12 @@ const http = require('http');
 const mssql = require('../db/mssql')
 const express = require('express')
 
-const app = express()
-const port = 3001
+const app = express();
+const port = 3001;
 
+console.log("__dirname", __dirname);
+app.use(express.static(__dirname + '../public'));
+app.use(express.static(__dirname + '../src'));
 app.get('/', (req, res) => res.send('Hello World!'))
 app.get('/createUser', (req, res) => {
   var user = req.query;
@@ -12,6 +15,7 @@ app.get('/createUser', (req, res) => {
   res.send("Creating user");
 })
 app.get('/interests', (req, res) => {
+  console.log("interests has been hit");
   mssql.getInterests((interests) =>  {
     console.log(interests);
     res.send(interests);

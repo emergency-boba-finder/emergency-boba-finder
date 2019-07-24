@@ -48,7 +48,7 @@ function addInterest(interest) {
     })
 }
 
-function addUserInterest()
+function addUserInterest(){}
 
 function createUser(user) {
     sql.connect(config, err => {

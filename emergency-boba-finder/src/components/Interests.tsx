@@ -23,11 +23,11 @@ class Interests extends React.Component<IUserInterestsProps, IUserInterestsState
         // this.setState({ options: getFakeInterests().sort() });
         axios.get('/interests')
             .then(function(response){
-                console.log(response);
+                console.log("response", response);
             })
             .catch(function (error) {
                 // handle error
-                console.log(error);
+                console.log("error", error);
             })
             .finally(function () {
                 console.log("made it");
