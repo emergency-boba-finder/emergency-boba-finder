@@ -1,6 +1,7 @@
 import './UserInformation.css';
 
 import React from 'react';
+import { Redirect } from 'react-router';
 import { Button } from 'semantic-ui-react';
 
 import Disclaimer from './Disclaimer';
@@ -9,14 +10,14 @@ import Interests from './Interests';
 import Location from './Location';
 
 interface IUserInformationProps {
-    userFullName: string; // Facebook login will provide this information
+    userFullName?: string; // Facebook login will provide this information
 }
 
 interface IUserInformationState {
     selectedInterestOptions: string[];
     location: string;
     disclaimerChecked: boolean;
-    disclaimerCompliant: boolean;
+    redirect: boolean;
 }
 
 class UserInformation extends React.Component<IUserInformationProps, IUserInformationState>{
@@ -24,23 +25,27 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
         selectedInterestOptions: [],
         location: "",
         disclaimerChecked: false,
-        disclaimerCompliant: false
+        disclaimerCompliant: false,
+        redirect: false
     }
 
     componentDidMount() {
         // make axios request and save data;
         // Replace with axios response.
-        this.setState({ disclaimerCompliant: false });
     }
 
     public render() {
+        if (this.state.redirect) {
+            return <Redirect push to="/homepage" />;
+        }
+
         return (
             <div className="userInformation">
-                {!this.state.disclaimerCompliant && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
+                {!!this.props.userFullName && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
                 <div className={"description"}>Please update the below information</div>
                 <Location location={this.state.location} onUpdateLocation={this.onUpdateLocation} />
                 <Interests onInterestChanged={this.onInterestChanged} />
-                {!this.state.disclaimerCompliant && <Disclaimer onChecked={this.toggleDisclaimerChecked} />}
+                {!!this.props.userFullName && <Disclaimer onChecked={this.toggleDisclaimerChecked} />}
                 <Button disabled={!this.isInformationComplete()} onClick={this.submitUserInformation}>Submit</Button>
             </div>
         );
@@ -57,8 +62,8 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
     }
 
     private isInformationComplete = (): boolean => {
-        const { selectedInterestOptions, location, disclaimerChecked, disclaimerCompliant } = this.state;
-        return (disclaimerChecked || disclaimerCompliant) && location.length > 0 && selectedInterestOptions.length > 0;
+        const { selectedInterestOptions, location, disclaimerChecked } = this.state;
+        return (disclaimerChecked || !this.props.userFullName) && location.length > 0 && selectedInterestOptions.length > 0;
     }
 
     private submitUserInformation = () => {
@@ -67,6 +72,8 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
         // For debugging - delete when path is available
         // TODO delete
         // console.log("Selected interest options: " + this.state.selectedInterestOptions + " location: " + this.state.location + " disclaimer: " + this.state.disclaimerChecked);
+        // If succeeded, proceed
+        this.setState({ redirect: true });
     }
 }
 
