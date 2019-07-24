@@ -43,7 +43,7 @@ class UserInformation extends React.Component<IUserInformationProps, IUserInform
             <div className="userInformation">
                 {!!this.props.userFullName && <div className={"welcomeTitle"}>Welcome {this.props.userFullName}</div>}
                 <div className={"description"}>Please update the below information</div>
-                <Location location={this.state.location} onUpdateLocation={this.onUpdateLocation} />
+                <Location onLocationChanged={this.onUpdateLocation} />
                 <Interests onInterestChanged={this.onInterestChanged} />
                 {!!this.props.userFullName && <Disclaimer onChecked={this.toggleDisclaimerChecked} />}
                 <Button disabled={!this.isInformationComplete()} onClick={this.submitUserInformation}>Submit</Button>

@@ -6,12 +6,15 @@ import UserHomePage from './UserHomePage';
 import { Route } from 'react-router';
 
 
+import Login from './Login';
+
 class EmergencyBobaFinder extends React.Component {
     render() {
         return (
             <div className="page">
+                <Route path="/" component={Login} />
                 <Route
-                    path='/'
+                    path='/create'
                     render={() => <UserInformation userFullName={"Tabitha"} />}
                 />
                 <Route
@@ -19,6 +22,7 @@ class EmergencyBobaFinder extends React.Component {
                     render={() => <UserInformation />}
                 />
                 <Route path="/homepage" component={UserHomePage} />
+                {/* <UserInformation userFullName={"Tabitha"} /> */}
             </div>
         );
     }
