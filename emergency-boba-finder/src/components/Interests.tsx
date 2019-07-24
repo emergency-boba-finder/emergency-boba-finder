@@ -1,5 +1,6 @@
 import React from 'react';
 import { Dropdown, DropdownItemProps, DropdownProps } from 'semantic-ui-react';
+import axios from 'axios';
 
 import { getFakeInterests } from './TempFakeData';
 
@@ -19,7 +20,19 @@ class Interests extends React.Component<IUserInterestsProps, IUserInterestsState
     componentDidMount() {
         // make axios request for available options
 
-        this.setState({ options: getFakeInterests().sort() });
+        // this.setState({ options: getFakeInterests().sort() });
+        axios.get('/interests')
+            .then(function(response){
+                console.log(response);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .finally(function () {
+                console.log("made it");
+            });
+            
     }
 
     public render() {
