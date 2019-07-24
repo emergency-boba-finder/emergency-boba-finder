@@ -21,7 +21,8 @@ function getInterests(done) {
         new sql.Request().query('SELECT * FROM Interests', (err, result) => {
             // ... error checks
 
-            done(result);
+            done(result.recordset);
+        sql.close();
         })
     })
 
@@ -29,6 +30,25 @@ function getInterests(done) {
         // ... error handler
     })
 }
+
+function addInterest(interest) {
+    sql.connect(config, err => {
+        if (err != undefined) {
+            console.log(err);
+        }
+
+        var query = `INSERT INTO [Interests] ([Name]) values ('${interest}')`;
+        new sql.Request().query(query, (err, result) => {
+        sql.close();
+        })
+    });
+
+    sql.on('error', err => {
+        // ... error handler
+    })
+}
+
+function addUserInterest()
 
 function createUser(user) {
     sql.connect(config, err => {
@@ -38,9 +58,10 @@ function createUser(user) {
         }
         // Query
 
-        var query = `INSERT INTO [Users] ([FirstName], [LastName], [Location], [Distance]) VALUES ('${user.FirstName}', '${user.LastName}', '${user.Location}', '${user.Distance}');`
+        var query = `INSERT INTO [Users] ([FirstName], [LastName], [Location], [Distance], [Email]) VALUES ('${user.FirstName}', '${user.LastName}', '${user.Location}', '${user.Distance}', '${user.Email}');`
         new sql.Request().query(query, (err, result) => {
             // ... error checks
+            sql.close();
         })
     })
 
@@ -51,3 +72,4 @@ function createUser(user) {
 
 module.exports.getInterests = getInterests
 module.exports.createUser = createUser
+module.exports.addInterest = addInterest
