@@ -13,3 +13,11 @@ export const getFakeInterests = () => {
         "Musical instruments"
     ];
 }
+
+export const getFakeLocations = () => {
+    return [
+        "Seattle",
+        "SF",
+        "New York"
+    ];
+}
