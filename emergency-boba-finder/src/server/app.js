@@ -21,5 +21,9 @@ app.get('/addInterest', (req, res) => {
   mssql.addInterest(req.query.Interest)
   res.send("Adding interest");
 })
+app.get('/addAvailability', (req, res) => {
+  mssql.addAvailability(req.query.Availability)
+  res.send("Adding Availability");
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
