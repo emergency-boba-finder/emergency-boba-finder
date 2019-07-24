@@ -25,5 +25,17 @@ app.get('/addAvailability', (req, res) => {
   mssql.addAvailability(req.query.Availability)
   res.send("Adding Availability");
 })
+app.get('/getUserById', (req, res) => {
+  mssql.getUserById(req.query.UserId, (user) => {
+    console.log(user);
+    res.send(user);
+  })
+})
+app.get('/getUserByEmail', (req, res) => {
+  mssql.getUserByEmail(req.query.Email, (user) => {
+    console.log(user);
+    res.send(user);
+  })
+})
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

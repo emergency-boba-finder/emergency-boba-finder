@@ -48,8 +48,6 @@ function addInterest(interest) {
     })
 }
 
-function addUserInterest()
-
 function createUser(user) {
     sql.connect(config, err => {
         // ... error checks
@@ -90,8 +88,50 @@ function addAvailability(availability) {
     })
 }
 
+function getUserById(userId, done) {
+    sql.connect(config, err => {
+        // ... error checks
+        if (err != undefined) {
+            console.log(err);
+        }
+        // Query
+
+        new sql.Request().query(`SELECT * FROM [Users] WHERE [UserId] = '${userId}'`, (err, result) => {
+            // ... error checks
+            done(result.recordset);
+            sql.close();
+        })
+    })
+
+    sql.on('error', err => {
+        // ... error handler
+    })
+}
+
+function getUserByEmail(email, done) {
+    sql.connect(config, err => {
+        // ... error checks
+        if (err != undefined) {
+            console.log(err);
+        }
+        // Query
+
+        new sql.Request().query(`SELECT * FROM [Users] WHERE LOWER([Email]) = '${email.toLowerCase()}'`, (err, result) => {
+            // ... error checks
+            done(result.recordset);
+            sql.close();
+        })
+    })
+
+    sql.on('error', err => {
+        // ... error handler
+    })
+}
+
 
 module.exports.getInterests = getInterests
 module.exports.createUser = createUser
 module.exports.addInterest = addInterest
 module.exports.addAvailability = addAvailability
+module.exports.getUserById = getUserById
+module.exports.getUserByEmail = getUserByEmail
