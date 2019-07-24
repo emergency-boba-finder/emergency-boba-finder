@@ -1,25 +1,55 @@
 import React from 'react';
-import { Form } from 'semantic-ui-react';
+import { Dropdown, DropdownItemProps, DropdownProps } from 'semantic-ui-react';
 
-export interface ILocation {
-    location: string;
-    onUpdateLocation: (newLocation: string) => void;
-};
+import { getFakeLocations } from './TempFakeData';
 
-class Location extends React.Component<ILocation>{
-    render() {
+interface IUserInterestsProps {
+    onLocationChanged: (selectedOption: string) => void;
+}
+
+interface IUserInterestsState {
+    options: string[];
+}
+
+class Location extends React.Component<IUserInterestsProps, IUserInterestsState>{
+    state = {
+        options: []
+    }
+
+    componentDidMount() {
+        // make axios request for available options
+
+        this.setState({ options: getFakeLocations().sort() });
+    }
+
+    public render() {
         return (
-            <Form>
-                <Form.Field>
-                    What's your Location?
-                        <input
-                        placeholder="City, state, zipcode"
-                        value={this.props.location}
-                        onChange={e => this.props.onUpdateLocation(e.target.value)}
-                    />
-                </Form.Field>
-            </Form>
+            <Dropdown
+                placeholder='Select location'
+                fluid selection
+                options={this.getDropdownOptions()}
+                onChange={this.onLocationChanged}
+                loading={this.state.options.length === 0}
+            />
         );
+    }
+
+    private getDropdownOptions(): DropdownItemProps[] {
+        return this.state.options.map((interestOption: string) => {
+            const trimmedOption = interestOption.trim();
+
+            return {
+                key: trimmedOption,
+                text: interestOption,
+                value: trimmedOption
+            }
+        });
+    }
+
+    private onLocationChanged = (event: React.SyntheticEvent<HTMLElement>, data: DropdownProps): void => {
+        if (data.value) {
+            this.props.onLocationChanged(data.value.toString());
+        }
     }
 }
 
