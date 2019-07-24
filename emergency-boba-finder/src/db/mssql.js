@@ -70,6 +70,28 @@ function createUser(user) {
     })
 }
 
+function addAvailability(availability) {
+    sql.connect(config, err => {
+        // ... error checks
+        if (err != undefined) {
+            console.log(err);
+        }
+        // Query
+
+        var query = `INSERT INTO [Availability] ([UserId], [DateTime], [Location]) VALUES ('${availability.UserId}', '${availability.DateTime}', '${availability.Location}', '${user.Distance}', '${user.Email}');`
+        new sql.Request().query(query, (err, result) => {
+            // ... error checks
+            sql.close();
+        })
+    })
+
+    sql.on('error', err => {
+        // ... error handler
+    })
+}
+
+
 module.exports.getInterests = getInterests
 module.exports.createUser = createUser
 module.exports.addInterest = addInterest
+module.exports.addAvailability = addAvailability
