@@ -19,10 +19,10 @@ class Login extends React.Component<{}, IUserInformationState> {
 
         return (
             <>
-                <div className="title">Welcome to the Emergency Boba Friend Finder</div>
+                <div className="title">Welcome to the Emergency Boba Finder</div>
                 <div className="description">Welcome to the Emergency Boba Friend Finder - where you can find friends locally with common interests or yes.. similarly Boba-minded individuals</div>
                 <div onClick={this.onClick}>
-                    <div style={{ pointerEvents: "none" }} className="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false" ></div>
+                    <div style={{ pointerEvents: "none", paddingLeft: "10px" }} className="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false" ></div>
                 </div>
             </>
         );

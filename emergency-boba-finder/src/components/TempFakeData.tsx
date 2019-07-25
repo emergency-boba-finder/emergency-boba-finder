@@ -16,8 +16,8 @@ export const getFakeInterests = () => {
 
 export const getFakeLocations = () => {
     return [
-        "Seattle",
-        "SF",
-        "New York"
+        "Seattle, WA",
+        "San Fransisco, CA",
+        "New York, NY"
     ];
 }
